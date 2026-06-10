@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MemoryAI Coding-Guard — Universal AI Coding Guardrails</title>
+<meta name="description" content="Stop AI coding agents from being sloppy. 4 core principles + anti-sloppy enforcement, installs into 11 IDE/CLI in one command." />
+<style>
+  :root { --bg: #0b0c0f; --fg: #e8e8e8; --muted: #888; --accent: #6cf; --code-bg: #161821; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--fg); }
+  main { max-width: 760px; margin: 0 auto; padding: 4rem 1.5rem; }
+  h1 { font-size: 2.4rem; margin: 0 0 0.5rem; letter-spacing: -0.02em; }
+  .tag { color: var(--muted); margin-bottom: 2rem; }
+  h2 { margin-top: 3rem; font-size: 1.4rem; letter-spacing: -0.01em; }
+  pre { background: var(--code-bg); padding: 1rem 1.25rem; border-radius: 6px; overflow-x: auto; font: 14px/1.5 ui-monospace, "JetBrains Mono", "SF Mono", Consolas, monospace; }
+  code { background: var(--code-bg); padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.9em; }
+  pre code { padding: 0; background: transparent; }
+  a { color: var(--accent); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .card { padding: 1rem 1.25rem; background: var(--code-bg); border-radius: 6px; }
+  .card h3 { margin: 0 0 0.5rem; font-size: 1rem; }
+  .card p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+  footer { margin-top: 5rem; padding-top: 2rem; border-top: 1px solid #222; color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>MemoryAI Coding-Guard</h1>
+  <p class="tag">Universal coding-agent guardrails. Install once → 11 IDE/CLI follow the rules.</p>
+
+  <h2>Install</h2>
+  <pre><code>npx @memoryai.dev/coding-guard install</code></pre>
+  <p>Detects which AI agent your project uses (Cursor, Claude Code, Aider, Copilot, …) and drops the right rule files into the right paths with the right format.</p>
+
+  <h2>The 4 principles</h2>
+  <div class="grid">
+    <div class="card"><h3>Think Before Coding</h3><p>State assumptions. Surface tradeoffs. Don't pick silently.</p></div>
+    <div class="card"><h3>Simplicity First</h3><p>Minimum code. No speculative abstractions.</p></div>
+    <div class="card"><h3>Surgical Changes</h3><p>Touch only what you must. Match existing style.</p></div>
+    <div class="card"><h3>Goal-Driven</h3><p>Define success criteria. Loop until verified.</p></div>
+  </div>
+
+  <h2>Plus 5 anti-sloppy rules</h2>
+  <p>Anti-hallucinate · Anti-fake-verify · Anti-out-of-scope · Anti-loop · Anti-destructive</p>
+
+  <h2>Supported (11)</h2>
+  <p>Claude Code · Cursor · Windsurf · Cline · Roo Code · Kilo Code · GitHub Copilot · JetBrains Junie · Aider · OpenAI Codex · Gemini CLI · OpenCode/Continue/Crush (universal AGENTS.md)</p>
+
+  <h2>Family</h2>
+  <p>Part of <strong>MemoryAI Guards</strong> — protect your AI dev workflow.</p>
+  <ul>
+    <li><a href="https://github.com/CH270035/memoryai-context-guard">@memoryai.dev/context-guard</a> — protect AI context from overflow</li>
+    <li><strong>@memoryai.dev/coding-guard</strong> — this</li>
+  </ul>
+
+  <h2>Links</h2>
+  <ul>
+    <li><a href="https://www.npmjs.com/package/@memoryai.dev/coding-guard">npm</a></li>
+    <li><a href="https://github.com/CH270035/memoryai-coding-guard">GitHub</a></li>
+    <li><a href="https://memoryai.dev">MemoryAI</a></li>
+  </ul>
+
+  <footer>
+    Built by <a href="https://memoryai.dev">MemoryAI</a> · MIT License · For developers who want their AI agents to think before they type.
+  </footer>
+</main>
+</body>
+</html>

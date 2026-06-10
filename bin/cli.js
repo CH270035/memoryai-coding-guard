@@ -38,14 +38,18 @@ program
   .command("update")
   .description("Update installed rules to latest version")
   .action(async () => {
-    console.log(kleur.cyan("ℹ  Update will be implemented in Phase 4."));
+    const { spawnSync } = await import("node:child_process");
+    console.log(kleur.cyan("Reinstalling latest from npm…"));
+    const r = spawnSync("npm", ["install", "-g", "@memoryai.dev/coding-guard@latest"], { stdio: "inherit", shell: true });
+    process.exit(r.status ?? 0);
   });
 
 program
   .command("doctor")
   .description("Check installation health and signature integrity")
   .action(async () => {
-    console.log(kleur.cyan("ℹ  Doctor will be implemented in Phase 4."));
+    const { doctor } = await import("../lib/doctor.js");
+    await doctor();
   });
 
 program
@@ -77,7 +81,8 @@ program
   .command("sync")
   .description("Rebuild platform files from rules/constitution.toml")
   .action(async () => {
-    console.log(kleur.cyan("ℹ  Sync will be implemented in Phase 2 (builder)."));
+    const { build } = await import("../lib/builder.js");
+    await build();
   });
 
 program

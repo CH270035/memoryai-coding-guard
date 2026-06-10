@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schemas.anthropic.com/claude-code/hooks.json",
+  "name": "memoryai-coding-guard",
+  "description": "Anti-sloppy enforcement hooks. Block dangerous ops, force verify before done.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "command": "node ${CLAUDE_PROJECT_DIR}/.coding-guard/hooks/block-dangerous.js",
+        "description": "Block rm -rf, git push --force, --no-verify, DROP TABLE without explicit confirm."
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "command": "node ${CLAUDE_PROJECT_DIR}/.coding-guard/hooks/post-edit-verify.js",
+        "description": "After edits: detect project type, run lint/typecheck on changed files. Re-inject errors."
+      }
+    ],
+    "Stop": [
+      {
+        "command": "node ${CLAUDE_PROJECT_DIR}/.coding-guard/hooks/stop-gate.js",
+        "description": "Block 'task done' if code touched but verify (build/test) never ran green this session."
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "command": "node ${CLAUDE_PROJECT_DIR}/.coding-guard/hooks/inject-rules.js",
+        "description": "When user says 'done|ship|deploy|merge', inject 4-rule reminder."
+      }
+    ]
+  }
+}

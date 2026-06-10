@@ -1,6 +1,6 @@
 {
   "name": "@memoryai.dev/coding-guard",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Universal coding-agent guardrails: 4 core principles + anti-sloppy enforcement, installs into 11 IDE/CLI in one command. Family of @memoryai.dev/*-guard.",
   "keywords": [
     "ai",
@@ -47,6 +47,8 @@
     "runtimes/",
     "scripts/",
     "telemetry/",
+    "eval/",
+    "docs/",
     "README.md",
     "LICENSE"
   ],
