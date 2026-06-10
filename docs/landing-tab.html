@@ -1,0 +1,162 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     MemoryAI Coding-Guard — Landing Tab Block
+     Paste vào tab "Coding-Guard" trên memoryai.vn landing page
+     Chỉ HTML thuần, không framework. Tự style trong block.
+     ═══════════════════════════════════════════════════════════ -->
+
+<section class="cg-tab" style="
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  color: #e8e8e8;
+  background: #0b0c0f;
+  padding: 3rem 1.5rem;
+  border-radius: 12px;
+  max-width: 880px;
+  margin: 0 auto;
+  line-height: 1.6;
+">
+
+  <!-- ─── HERO ──────────────────────────────────────────── -->
+  <div style="text-align: center; margin-bottom: 2.5rem;">
+    <h1 style="
+      font-size: 2.4rem;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.5rem;
+      background: linear-gradient(135deg, #6cf 0%, #9f6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    ">MemoryAI Coding-Guard</h1>
+    <p style="color: #888; font-size: 1.1rem; margin: 0;">
+      Stop AI coding agents from being sloppy. Install once → 11 IDE/CLI follow the rules.
+    </p>
+    <div style="margin-top: 1.5rem;">
+      <span style="background: #161821; padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.85rem; color: #6cf;">
+        v1.1.0 · MIT · @memoryai.dev/coding-guard
+      </span>
+    </div>
+  </div>
+
+  <!-- ─── QUICK INSTALL ─────────────────────────────────── -->
+  <div style="background: #161821; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
+    <h2 style="margin: 0 0 1rem; font-size: 1.2rem; color: #fff;">Cài 1 lệnh</h2>
+    <pre style="
+      background: #0b0c0f;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      font: 0.95rem ui-monospace, 'JetBrains Mono', Consolas, monospace;
+      color: #9f6;
+      margin: 0;
+    "><code>npx @memoryai.dev/coding-guard install</code></pre>
+    <p style="color: #888; margin: 1rem 0 0; font-size: 0.9rem;">
+      Tự động phát hiện AI agent đang dùng (Cursor, Claude Code, Aider, Copilot…) và copy đúng file rule vào đúng path.
+    </p>
+  </div>
+
+  <!-- ─── 4 PRINCIPLES ──────────────────────────────────── -->
+  <h2 style="font-size: 1.4rem; margin: 2.5rem 0 1rem; color: #fff;">4 nguyên tắc cốt lõi</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+    <div style="background: #161821; padding: 1.25rem; border-radius: 8px; border-left: 3px solid #6cf;">
+      <h3 style="margin: 0 0 0.5rem; font-size: 1rem; color: #fff;">Think Before Coding</h3>
+      <p style="margin: 0; color: #888; font-size: 0.9rem;">State assumptions. Surface tradeoffs. Đừng đoán mò.</p>
+    </div>
+    <div style="background: #161821; padding: 1.25rem; border-radius: 8px; border-left: 3px solid #9f6;">
+      <h3 style="margin: 0 0 0.5rem; font-size: 1rem; color: #fff;">Simplicity First</h3>
+      <p style="margin: 0; color: #888; font-size: 0.9rem;">Code tối thiểu. Không speculative abstraction.</p>
+    </div>
+    <div style="background: #161821; padding: 1.25rem; border-radius: 8px; border-left: 3px solid #fc6;">
+      <h3 style="margin: 0 0 0.5rem; font-size: 1rem; color: #fff;">Surgical Changes</h3>
+      <p style="margin: 0; color: #888; font-size: 0.9rem;">Chỉ sửa cái user yêu cầu. Match style hiện có.</p>
+    </div>
+    <div style="background: #161821; padding: 1.25rem; border-radius: 8px; border-left: 3px solid #f69;">
+      <h3 style="margin: 0 0 0.5rem; font-size: 1rem; color: #fff;">Goal-Driven</h3>
+      <p style="margin: 0; color: #888; font-size: 0.9rem;">Define success criteria. Loop đến khi verify.</p>
+    </div>
+  </div>
+
+  <!-- ─── ANTI-SLOPPY ───────────────────────────────────── -->
+  <h2 style="font-size: 1.4rem; margin: 2.5rem 0 1rem; color: #fff;">+ 5 lớp anti-ẩu</h2>
+  <ul style="color: #ccc; padding-left: 1.5rem; line-height: 2;">
+    <li><strong style="color: #fff;">Anti-hallucinate</strong> — buộc verify import vs lockfile, cite file:line</li>
+    <li><strong style="color: #fff;">Anti-fake-verify</strong> — paste exit code thật, không "claim done" suông</li>
+    <li><strong style="color: #fff;">Anti-out-of-scope</strong> — 5+ files → plan trước, ack sau</li>
+    <li><strong style="color: #fff;">Anti-loop</strong> — 2 fails giống nhau → STOP, diagnose root cause</li>
+    <li><strong style="color: #fff;">Anti-destructive</strong> — rm -rf, git push --force luôn cần confirm</li>
+  </ul>
+
+  <!-- ─── PLATFORMS ─────────────────────────────────────── -->
+  <h2 style="font-size: 1.4rem; margin: 2.5rem 0 1rem; color: #fff;">11 platform hỗ trợ</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.5rem; font-size: 0.9rem;">
+    <div style="background: #161821; padding: 0.6rem 0.9rem; border-radius: 4px;">Claude Code</div>
+    <div style="background: #161821; padding: 0.6rem 0.9rem; border-radius: 4px;">Cursor</div>
+    <div style="background: #161821; padding: 0.6rem 0.9rem; border-radius: 4px;">Windsurf</div>
+    <div style="background: #161821; padding: 0.6rem 0.9rem; border-radius: 4px;">Cline</div>
+    <div style="background: #161821; padding: 0.6rem 0.9rem; border-radius: 4px;">Roo Code</div>
+    <div style="background: #161821; padding: 0.6rem 0.9rem; border-radius: 4px;">Kilo Code</div>
+    <div style="background: #161821; padding: 0.6rem 0.9rem; border-radius: 4px;">GitHub Copilot</div>
+    <div style="background: #161821; padding: 0.6rem 0.9rem; border-radius: 4px;">JetBrains Junie</div>
+    <div style="background: #161821; padding: 0.6rem 0.9rem; border-radius: 4px;">Aider</div>
+    <div style="background: #161821; padding: 0.6rem 0.9rem; border-radius: 4px;">OpenAI Codex</div>
+    <div style="background: #161821; padding: 0.6rem 0.9rem; border-radius: 4px;">Gemini CLI</div>
+    <div style="background: #161821; padding: 0.6rem 0.9rem; border-radius: 4px;">OpenCode/Continue/Crush</div>
+  </div>
+
+  <!-- ─── COMMANDS ──────────────────────────────────────── -->
+  <h2 style="font-size: 1.4rem; margin: 2.5rem 0 1rem; color: #fff;">CLI commands</h2>
+  <pre style="
+    background: #161821;
+    padding: 1.25rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    font: 0.9rem ui-monospace, 'JetBrains Mono', Consolas, monospace;
+    color: #ccc;
+    line-height: 1.7;
+    margin: 0;
+"><code><span style="color:#888"># Cài cho project hiện tại</span>
+npx @memoryai.dev/coding-guard install
+
+<span style="color:#888"># Cài cho mọi platform</span>
+npx @memoryai.dev/coding-guard install --all
+
+<span style="color:#888"># Chỉ 1 platform</span>
+npx @memoryai.dev/coding-guard install --only cursor
+
+<span style="color:#888"># Xem trước, không ghi file</span>
+npx @memoryai.dev/coding-guard install --dry-run
+
+<span style="color:#888"># Cài global + dùng tên ngắn 'cg'</span>
+npm i -g @memoryai.dev/coding-guard
+coding-guard list           <span style="color:#888"># 11 platforms</span>
+coding-guard doctor         <span style="color:#888"># health check</span>
+coding-guard update         <span style="color:#888"># lên latest</span>
+cg install                  <span style="color:#888"># alias ngắn</span></code></pre>
+
+  <!-- ─── FAMILY ────────────────────────────────────────── -->
+  <h2 style="font-size: 1.4rem; margin: 2.5rem 0 1rem; color: #fff;">MemoryAI Guards Family</h2>
+  <div style="display: grid; gap: 1rem;">
+    <a href="https://github.com/CH270035/memoryai-context-guard" style="
+      display: block;
+      background: #161821;
+      padding: 1.25rem;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #ccc;
+    ">
+      <strong style="color: #6cf;">@memoryai.dev/context-guard</strong>
+      <div style="color: #888; font-size: 0.9rem; margin-top: 0.25rem;">Bảo vệ context AI khỏi overflow</div>
+    </a>
+    <div style="background: #161821; padding: 1.25rem; border-radius: 8px; border: 1px solid #6cf;">
+      <strong style="color: #9f6;">@memoryai.dev/coding-guard</strong> <span style="color: #888;">← bạn đang xem</span>
+      <div style="color: #888; font-size: 0.9rem; margin-top: 0.25rem;">Chống AI ẩu khi viết code</div>
+    </div>
+  </div>
+
+  <!-- ─── LINKS ─────────────────────────────────────────── -->
+  <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #222; display: flex; gap: 1.5rem; flex-wrap: wrap;">
+    <a href="https://www.npmjs.com/package/@memoryai.dev/coding-guard" style="color: #6cf; text-decoration: none;">📦 npm</a>
+    <a href="https://github.com/CH270035/memoryai-coding-guard" style="color: #6cf; text-decoration: none;">⚡ GitHub</a>
+    <a href="https://github.com/CH270035/memoryai-coding-guard/blob/main/README.md" style="color: #6cf; text-decoration: none;">📖 Full docs</a>
+    <a href="https://github.com/CH270035/memoryai-coding-guard/issues" style="color: #6cf; text-decoration: none;">🐛 Issues</a>
+  </div>
+
+</section>
