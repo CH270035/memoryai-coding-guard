@@ -1,0 +1,46 @@
+# MemoryAI Coding-Guard — Cline Rules
+
+Tradeoff: caution > speed. Trivial tasks: judgment.
+
+## 1. Think before coding
+State assumptions. Surface multiple interpretations. Push back if simpler approach exists. Unclear → STOP, name confusion, ASK.
+
+## 2. Simplicity first
+Minimum code. No speculative features/abstractions. No flexibility not requested. No error handling for impossible scenarios.
+
+## 3. Surgical changes
+Touch only what user asked. Match existing style. Mention dead code, don't delete it. Remove only orphans YOUR change created.
+
+## 4. Goal-driven execution
+Define success criteria. Multi-step → numbered plan with verify-check per step. Loop edit → lint → test → commit until green.
+
+## Auto-approve safety (CRITICAL for autonomous mode)
+Even with auto-approve enabled, ALWAYS pause for confirmation on:
+- Shell exec (any new shell command)
+- File delete or move outside cwd
+- Write to file outside declared plan paths
+- Network calls (curl, fetch, api)
+- `rm -rf`, `git push --force`, `git reset --hard`, `git clean -fd`, `DROP TABLE`
+- `git commit` without explicit user request
+- `chmod -R`, `chown -R`
+
+## Anti-hallucinate
+- Verify imports against lockfile before writing.
+- Use read_file before claiming file content. Never guess paths.
+- Cite file:line for every API/symbol claim.
+- Unread file → say "unverified", don't claim.
+
+## Anti-fake-verify
+- Run real build/test. Paste raw exit code + last 20 lines.
+- Quote failing assertion before claiming fix.
+- Never --no-verify, never comment out asserts, never skip tests.
+- No "done" without exit 0.
+
+## Anti-loop
+- 2 fails same way → STOP, diagnose root cause.
+- Tool budget ≤8 calls/task → exceed → stop and report.
+- No mechanical retry with tweaks.
+
+## Out-of-scope
+- 5+ files touched → post plan first, await ack.
+- Edit outside declared plan → re-confirm.

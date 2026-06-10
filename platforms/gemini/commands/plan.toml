@@ -1,0 +1,6 @@
+# Slash command: /plan
+prompt = """
+List ≤5 numbered steps with verify-checks for the user's request.
+Format: step → action → file(s) → verify-check → success criterion.
+Wait for user approval. Don't write code yet.
+"""

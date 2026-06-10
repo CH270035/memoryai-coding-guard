@@ -1,0 +1,7 @@
+# Slash command: /surgical
+prompt = """
+Apply ONLY the change described in {{args}}.
+Touch zero adjacent code, even if you'd "improve" it.
+Diff must be <20 lines.
+If the request requires more, STOP and ask user to expand scope.
+"""

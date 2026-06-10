@@ -1,0 +1,28 @@
+# MemoryAI Coding-Guard (Windsurf Cascade)
+Tradeoff: caution > speed. Trivial tasks: judgment.
+
+## Think before coding
+State assumptions. Surface tradeoffs. Unclear → ASK, don't guess.
+
+## Simplicity
+Minimum code. No speculative features, abstractions, or error handling for impossible scenarios.
+
+## Surgical changes
+Edit only files in declared plan. Match existing style. Remove only orphans YOUR change created. Mention pre-existing dead code, don't delete it.
+
+## Goal-driven (Flow mode)
+1. Emit numbered plan: step → verify-check → target file.
+2. Read before edit (view_file/list_dir).
+3. Run real tests; paste exit code + tail. Never skip/comment asserts. No --no-verify.
+4. If 2 attempts fail same way → STOP, diagnose root cause, propose new approach.
+5. Out-of-plan edit → re-confirm with user.
+
+## Anti-sloppy
+- Verify imports against lockfile/package.json before writing.
+- Cite file:line for every API claim. Unread → say "unverified".
+- 5+ files touched → post plan first, await ack.
+- Tool budget ≤8 calls/task. Exceeded → stop and report.
+- rm -rf, git push --force, git reset --hard → require explicit confirm.
+
+## Memory Bank
+Store decisions + preferences via create_memory. Recall before re-asking. Skip transient task state.

@@ -1,0 +1,44 @@
+---
+description: MemoryAI Coding-Guard. Universal coding-agent guardrails — 4 core principles + anti-sloppy enforcement. Activate when writing, editing, refactoring, debugging, or reviewing code. Triggers on words like "fix", "implement", "refactor", "add feature", "done", "review", "ship".
+globs:
+alwaysApply: false
+---
+
+# MemoryAI Coding-Guard — Cursor Rules
+
+Apply when the task produces or modifies code. Skip pure docs/Q&A/chat.
+
+## Per-mode behavior
+- **Ask**: clarify; surface tradeoffs; no edits unless asked.
+- **Edit**: surgical only; no adjacent cleanup.
+- **Agent**: state plan, execute, verify via build/tests, paste exit code.
+
+## 1. Think before coding
+State assumptions explicitly. Surface multiple interpretations. Push back when a simpler approach exists. Unclear → STOP, name the confusion, ASK.
+
+## 2. Simplicity first
+Minimum code. No speculative abstractions, flexibility, or impossible-error handling. Senior-engineer test: would they call this overcomplicated?
+
+## 3. Surgical changes
+Every changed line traces to the request. Match existing style. Mention dead code, don't delete it. Remove only orphans YOUR change created.
+
+## 4. Goal-driven execution
+Define verifiable success: failing test → passing, build green, exit 0. Loop until verified.
+
+## Anti-sloppy gates (HARD RULES)
+- No "done" claim without build/test exit code pasted as evidence.
+- Out-of-scope refactor requires explicit approval.
+- Never silently skip/xfail tests, never `--no-verify`, never comment out asserts.
+- Edits touching >5 files: post plan first, await ack.
+- Quote the failing assertion before claiming a fix.
+- Verify imports against `package.json`/lockfile before writing.
+- Reference files via `#file:path` — never guess paths.
+- 2 fails same way → STOP, diagnose root cause, no mechanical retry.
+- `rm -rf`, `git push --force`, `git reset --hard`, `DROP TABLE` → require explicit confirm.
+
+## Verification
+Use the project's actual commands and paste the exit code:
+- Node: `npm test && npm run lint && npm run build`
+- Python: `pytest -x && ruff check . && mypy .`
+- Go: `go test ./... && go vet ./... && go build ./...`
+- Rust: `cargo test && cargo clippy -- -D warnings`

@@ -1,0 +1,37 @@
+# Aider config — anti-sloppy defaults
+# Drop into project root. Auto-loaded by Aider on startup.
+
+read: [CONVENTIONS.md]
+
+# CRITICAL anti-sloppy: disable auto-commit (default ON is sloppy)
+auto-commits: false
+dirty-commits: false
+
+# Show every diff to the user
+show-diffs: true
+
+# Authorship attribution
+attribute-author: true
+attribute-committer: true
+
+# Cache prompts to avoid silent re-reads
+cache-prompts: true
+
+# Bigger repo map for medium projects
+map-tokens: 2048
+
+# Architect/Editor mode (plan-first)
+architect: true
+
+# Auto-lint after each edit batch
+auto-lint: true
+
+# Do NOT auto-test (let user trigger /test explicitly)
+auto-test: false
+
+# Never rubber-stamp confirmations
+yes-always: false
+
+# Verification commands (uncomment + edit per project)
+# test-cmd: "pytest -x"
+# lint-cmd: "ruff check ."

@@ -1,0 +1,22 @@
+# Codex config — anti-sloppy defaults
+# Place at ~/.codex/config.toml
+
+model = "gpt-5.1-codex"
+
+# CRITICAL: never set "never" globally
+approval_policy = "on-request"
+
+# Default to workspace-write (safer than full access)
+sandbox_mode = "workspace-write"
+
+# More thinking = less sloppy
+model_reasoning_effort = "high"
+
+[sandbox_workspace_write]
+# Default OFF; opt-in per project
+network_access = false
+
+# MCP server registrations (uncomment + configure as needed)
+# [mcp_servers.coding-guard-lint]
+# command = "npx"
+# args = ["@memoryai-dev/coding-guard", "mcp-lint"]

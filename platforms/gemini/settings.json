@@ -1,0 +1,14 @@
+{
+  "model": "gemini-3-pro",
+  "contextFileName": ["GEMINI.md", "AGENTS.md", "CLAUDE.md"],
+  "autoAccept": false,
+  "checkpointing": { "enabled": true },
+  "tools": {
+    "shell": { "confirmDestructive": true }
+  },
+  "telemetry": { "enabled": false },
+  "maxSessionTurns": 50,
+  "summarizeToolOutput": {
+    "default": { "tokenBudget": 2000 }
+  }
+}

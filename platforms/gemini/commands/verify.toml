@@ -1,0 +1,6 @@
+# Slash command: /verify
+prompt = """
+Run the project's build + test commands.
+Report PASS/FAIL only. Paste the exit code and last 20 lines of output as evidence.
+No code dump. No re-explanation.
+"""
