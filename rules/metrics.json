@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Coding-Guard Metrics Definition",
+  "description": "Per-rule measurable metrics. Drives self-tuning + telemetry dashboards.",
+  "metrics": {
+    "assumption_density": {
+      "rule_id": "think-before-coding",
+      "description": "Number of stated assumptions per task / number of decision points in task.",
+      "unit": "ratio",
+      "range": [0, 1],
+      "good_direction": "high",
+      "computation": "stated_assumptions / detected_decision_points"
+    },
+    "loc_delta_percentile": {
+      "rule_id": "simplicity-first",
+      "description": "Lines added in this PR vs median LoC of similar tasks in repo history.",
+      "unit": "ratio",
+      "range": [0, 10],
+      "good_direction": "low",
+      "threshold_warn": 1.5,
+      "computation": "loc_added / repo_median_loc_per_task"
+    },
+    "diff_scope_purity": {
+      "rule_id": "surgical-changes",
+      "description": "Fraction of changed lines that trace to declared task scope.",
+      "unit": "ratio",
+      "range": [0, 1],
+      "good_direction": "high",
+      "threshold_block": 1.0,
+      "computation": "in_scope_lines / total_changed_lines"
+    },
+    "verification_loop_closure": {
+      "rule_id": "goal-driven",
+      "description": "Whether the verification graph completed: tests written, run, passed, build green.",
+      "unit": "boolean",
+      "range": [0, 1],
+      "good_direction": "high",
+      "threshold_block": 1.0
+    },
+    "hallucination_rate": {
+      "rule_id": "anti-hallucinate",
+      "description": "Number of unverified API/import claims per 100 tool calls.",
+      "unit": "rate_per_100",
+      "good_direction": "low"
+    },
+    "fake_verify_count": {
+      "rule_id": "anti-fake-verify",
+      "description": "Number of done-claims without exit code evidence.",
+      "unit": "count",
+      "good_direction": "low"
+    },
+    "out_of_scope_edits": {
+      "rule_id": "anti-out-of-scope",
+      "description": "Number of file edits outside declared task scope.",
+      "unit": "count",
+      "good_direction": "low"
+    },
+    "retry_loop_depth": {
+      "rule_id": "anti-loop",
+      "description": "Number of consecutive same-error retries before stopping.",
+      "unit": "count",
+      "range": [0, 10],
+      "good_direction": "low",
+      "threshold_warn": 2
+    },
+    "destructive_attempts": {
+      "rule_id": "anti-destructive",
+      "description": "Attempted destructive ops without explicit confirm.",
+      "unit": "count",
+      "good_direction": "low"
+    }
+  },
+  "aggregation": {
+    "per_pr": ["loc_delta_percentile", "diff_scope_purity", "verification_loop_closure"],
+    "per_session": ["assumption_density", "hallucination_rate", "fake_verify_count", "retry_loop_depth"],
+    "per_org": ["destructive_attempts", "out_of_scope_edits"]
+  }
+}

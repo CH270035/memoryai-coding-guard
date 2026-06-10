@@ -1,0 +1,68 @@
+{
+  "name": "@memoryai-dev/coding-guard",
+  "version": "1.0.0",
+  "description": "Universal coding-agent guardrails: 4 Karpathy principles + anti-sloppy enforcement, installs into 11 IDE/CLI in one command. Family of @memoryai-dev/*-guard.",
+  "keywords": [
+    "ai",
+    "coding-agent",
+    "claude-code",
+    "cursor",
+    "copilot",
+    "aider",
+    "codex",
+    "windsurf",
+    "cline",
+    "rules",
+    "guardrails",
+    "karpathy",
+    "memoryai"
+  ],
+  "homepage": "https://coding-guard.memoryai.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CH270035/memoryai-coding-guard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CH270035/memoryai-coding-guard/issues"
+  },
+  "author": {
+    "name": "MemoryAI",
+    "url": "https://memoryai.dev"
+  },
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "coding-guard": "./bin/cli.js",
+    "cg": "./bin/cli.js"
+  },
+  "main": "./lib/index.js",
+  "files": [
+    "bin/",
+    "lib/",
+    "rules/",
+    "platforms/",
+    "runtimes/",
+    "scripts/",
+    "telemetry/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node lib/builder.js",
+    "verify": "node lib/signer.js verify",
+    "sign": "node lib/signer.js sign",
+    "test": "node --test eval/runner.js",
+    "prepublishOnly": "npm run build && npm run verify"
+  },
+  "dependencies": {
+    "@iarna/toml": "^2.2.5",
+    "commander": "^12.1.0",
+    "kleur": "^4.1.5"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
