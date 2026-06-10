@@ -5,7 +5,7 @@
 [![npm](https://img.shields.io/npm/v/@memoryai-dev/coding-guard.svg)](https://www.npmjs.com/package/@memoryai-dev/coding-guard)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Stop AI agents from being sloppy. **4 Karpathy principles + anti-sloppy enforcement** — packaged as drop-in rule files for every major coding agent in 2026.
+Stop AI agents from being sloppy. **4 core coding principles + anti-sloppy enforcement** — packaged as drop-in rule files for every major coding agent in 2026.
 
 ## What it does
 
@@ -22,7 +22,7 @@ That single command:
 
 ## The 4 principles
 
-Derived from [Andrej Karpathy's observations](https://x.com/karpathy/status/2015883857489522876) on LLM coding pitfalls.
+Distilled from years of senior-engineer practice on LLM coding workflows.
 
 | Principle | What it stops |
 |---|---|
@@ -123,4 +123,4 @@ MIT
 
 ---
 
-Built by [MemoryAI](https://memoryai.dev). Inspired by [@karpathy](https://x.com/karpathy)'s post on LLM coding pitfalls.
+Built by [MemoryAI](https://memoryai.dev). For developers who want their AI agents to think before they type.

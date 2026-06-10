@@ -1,5 +1,5 @@
 # MemoryAI Coding-Guard — Constitution
-# 4 Karpathy principles + anti-sloppy enforcement
+# 4 core coding principles + anti-sloppy enforcement
 # Source-of-truth. All platform files BUILD from this.
 # DO NOT edit platform files directly — edit here + rebuild.
 

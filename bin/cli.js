@@ -19,7 +19,7 @@ const program = new Command();
 program
   .name("coding-guard")
   .description(
-    "Universal coding-agent guardrails. 4 Karpathy principles + anti-sloppy enforcement, installs into 11 IDE/CLI in one command.",
+    "Universal coding-agent guardrails. 4 core principles + anti-sloppy enforcement, installs into 11 IDE/CLI in one command.",
   )
   .version(pkg.version);
 
