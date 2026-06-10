@@ -2,7 +2,7 @@
 
 > Universal coding-agent guardrails. **Install once → 11 IDE/CLI follow the rules.**
 
-[![npm](https://img.shields.io/npm/v/@memoryai-dev/coding-guard.svg)](https://www.npmjs.com/package/@memoryai-dev/coding-guard)
+[![npm](https://img.shields.io/npm/v/@memoryai.dev/coding-guard.svg)](https://www.npmjs.com/package/@memoryai.dev/coding-guard)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Stop AI agents from being sloppy. **4 core coding principles + anti-sloppy enforcement** — packaged as drop-in rule files for every major coding agent in 2026.
@@ -12,7 +12,7 @@ Stop AI agents from being sloppy. **4 core coding principles + anti-sloppy enfor
 AI coding agents share the same bad habits: they refactor code you didn't ask them to, over-engineer simple tasks, fake "done" without running tests, and hallucinate APIs that don't exist. **Coding-Guard** installs typed behavioral rules into your project, plus enforcement hooks that *block* sloppy actions instead of just suggesting they're bad.
 
 ```
-npx @memoryai-dev/coding-guard install
+npx @memoryai.dev/coding-guard install
 ```
 
 That single command:
@@ -56,14 +56,14 @@ Plus 5 anti-sloppy mechanisms: anti-hallucinate, anti-fake-verify, anti-out-of-s
 ### npm (recommended)
 
 ```bash
-npm i -g @memoryai-dev/coding-guard
+npm i -g @memoryai.dev/coding-guard
 coding-guard install
 ```
 
 Or run directly without installing:
 
 ```bash
-npx @memoryai-dev/coding-guard install
+npx @memoryai.dev/coding-guard install
 ```
 
 ### curl (Linux / macOS)
@@ -111,10 +111,10 @@ The constitution is signed Ed25519 from day one. Future-proof for cross-vendor r
 
 ## Family
 
-`@memoryai-dev/coding-guard` is part of the **MemoryAI Guards** family:
+`@memoryai.dev/coding-guard` is part of the **MemoryAI Guards** family:
 
-- [`@memoryai-dev/context-guard`](https://github.com/CH270035/memoryai-context-guard) — protect AI context from overflow
-- `@memoryai-dev/coding-guard` — this package
+- [`@memoryai.dev/context-guard`](https://github.com/CH270035/memoryai-context-guard) — protect AI context from overflow
+- `@memoryai.dev/coding-guard` — this package
 - More guards coming.
 
 ## License

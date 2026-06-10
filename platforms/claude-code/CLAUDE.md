@@ -1,6 +1,6 @@
 # Coding-Guard — Behavioral Guidelines for AI Coding Agents
 
-> Source: `@memoryai-dev/coding-guard` constitution v1.0.0
+> Source: `@memoryai.dev/coding-guard` constitution v1.0.0
 > Trade-off: caution > speed. For trivial tasks, use judgment.
 
 ## 1. Think Before Coding

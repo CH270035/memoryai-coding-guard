@@ -50,4 +50,4 @@ Define verifiable success: failing test → passing, build green, exit 0. Loop e
 
 ---
 
-Source: [@memoryai-dev/coding-guard](https://github.com/CH270035/memoryai-coding-guard) · v1.0.0 · MIT
+Source: [@memoryai.dev/coding-guard](https://github.com/CH270035/memoryai-coding-guard) · v1.0.0 · MIT

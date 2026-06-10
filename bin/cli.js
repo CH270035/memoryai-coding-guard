@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // bin/cli.js
-// @memoryai-dev/coding-guard CLI entry
+// @memoryai.dev/coding-guard CLI entry
 // Commands: install, update, doctor, list, sync, verify, sign
 
 import { Command } from "commander";

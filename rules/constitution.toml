@@ -215,7 +215,7 @@ flush_interval_seconds = 300
 # ─────────────────────────────────────────────────────────────
 
 [distribution]
-npm    = "@memoryai-dev/coding-guard"
+npm    = "@memoryai.dev/coding-guard"
 github = "https://github.com/CH270035/memoryai-coding-guard"
 curl   = "https://coding-guard.memoryai.dev/install.sh"
 ps1    = "https://coding-guard.memoryai.dev/install.ps1"

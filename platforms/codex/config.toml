@@ -19,4 +19,4 @@ network_access = false
 # MCP server registrations (uncomment + configure as needed)
 # [mcp_servers.coding-guard-lint]
 # command = "npx"
-# args = ["@memoryai-dev/coding-guard", "mcp-lint"]
+# args = ["@memoryai.dev/coding-guard", "mcp-lint"]
