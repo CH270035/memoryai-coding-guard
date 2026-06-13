@@ -52,7 +52,24 @@
           "short": { "type": "string" },
           "long": { "type": "string" },
           "audio_preamble_vi": { "type": "string" },
-          "audio_preamble_en": { "type": "string" }
+          "audio_preamble_en": { "type": "string" },
+          "rationalizations": {
+            "type": "array",
+            "description": "Common excuses an agent uses to skip this rule, paired with the counter-argument.",
+            "items": {
+              "type": "object",
+              "required": ["lie", "truth"],
+              "properties": {
+                "lie": { "type": "string", "description": "The excuse the agent tells itself." },
+                "truth": { "type": "string", "description": "Why the excuse is wrong." }
+              }
+            }
+          },
+          "red_flags": {
+            "type": "array",
+            "description": "Observable anti-patterns that indicate this rule is being violated. Predicate-friendly.",
+            "items": { "type": "string" }
+          }
         }
       }
     },
@@ -66,7 +83,26 @@
     "verification_graph": {
       "type": "object",
       "properties": {
-        "nodes": { "type": "array", "items": { "type": "string" } },
+        "nodes": {
+          "oneOf": [
+            { "type": "array", "items": { "type": "string" } },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id"],
+                "properties": {
+                  "id": { "type": "string" },
+                  "evidence": {
+                    "type": "array",
+                    "description": "Required evidence artifacts for this node (e.g. exit_code, tail:20, regression_test).",
+                    "items": { "type": "string" }
+                  }
+                }
+              }
+            }
+          ]
+        },
         "edges": {
           "type": "array",
           "items": { "type": "array", "items": { "type": "string" }, "minItems": 2, "maxItems": 2 }
@@ -88,6 +124,66 @@
     "distribution": {
       "type": "object",
       "additionalProperties": { "type": "string" }
+    },
+    "skills": {
+      "type": "array",
+      "description": "Optional workflow skills referenced by rules. Loaded from rules/skills/<id>.toml at build time.",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "phase", "when", "process"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "title": { "type": "string" },
+          "phase": { "type": "string", "enum": ["define", "plan", "build", "verify", "review", "ship", "meta"] },
+          "source": { "type": "string", "format": "uri", "description": "Upstream URL when adapted from external work." },
+          "source_license": { "type": "string" },
+          "when": { "type": "array", "items": { "type": "string" } },
+          "process": { "type": "array", "items": { "type": "string" } },
+          "rationalizations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["lie", "truth"],
+              "properties": {
+                "lie": { "type": "string" },
+                "truth": { "type": "string" }
+              }
+            }
+          },
+          "red_flags": { "type": "array", "items": { "type": "string" } },
+          "verification": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "personas": {
+      "type": "array",
+      "description": "Reusable agent personas (code-reviewer, security-auditor, etc.).",
+      "items": {
+        "type": "object",
+        "required": ["id", "role", "summary"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "role": { "type": "string" },
+          "summary": { "type": "string" },
+          "axes": { "type": "array", "items": { "type": "string" } },
+          "output_format": { "type": "string" }
+        }
+      }
+    },
+    "commands": {
+      "type": "array",
+      "description": "Slash command entry points (rendered to platforms that support them).",
+      "items": {
+        "type": "object",
+        "required": ["id", "trigger", "summary"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9:-]+$" },
+          "trigger": { "type": "string", "description": "User-typed slash command, e.g. /cg:spec" },
+          "summary": { "type": "string" },
+          "invokes": { "type": "array", "items": { "type": "string" }, "description": "Skill or persona IDs invoked." },
+          "prompt": { "type": "string" }
+        }
+      }
     }
   }
 }

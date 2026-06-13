@@ -1,0 +1,47 @@
+# Skill: security-and-hardening
+# Source: https://github.com/addyosmani/agent-skills/blob/main/skills/security-and-hardening/SKILL.md
+# Source-License: MIT (see /NOTICE)
+
+id           = "security-and-hardening"
+title        = "Security and Hardening"
+phase        = "review"
+source       = "https://github.com/addyosmani/agent-skills/blob/main/skills/security-and-hardening/SKILL.md"
+source_license = "MIT"
+strengthens  = ["anti-destructive"]
+
+when = [
+  "Handling user input, auth, or session state",
+  "Storing PII, payment data, or secrets",
+  "Adding a third-party dependency or external integration",
+  "Building anything reachable from the public internet",
+]
+
+process = [
+  "Threat-model first: list trust boundaries, assets, and abuse cases",
+  "Three-tier boundaries: untrusted edge → validated core → trusted internals",
+  "Validate input with allowlists at the edge, never with denylists",
+  "Parameterize queries, encode output, set security headers",
+  "Hash passwords with bcrypt/argon2; rotate and scope secrets",
+  "Run dependency audit on every change",
+]
+
+rationalizations = [
+  { lie = "It's an internal tool, threat-modelling is overkill.",      truth = "Internal tools become external one merge later. Model now." },
+  { lie = "We trust our database, no need to parameterize.",           truth = "Trust the layer; parameterize anyway. Defense in depth costs nothing." },
+  { lie = "This dependency is fine, npm audit is too noisy.",          truth = "Audit, then suppress with reason. Silent suppression hides supply-chain attacks." },
+]
+
+red_flags = [
+  "Raw SQL string concatenation with user input",
+  "Password stored or logged in plaintext",
+  "CORS set to wildcard with credentials",
+  "Secret committed to git history",
+  "Third-party dependency with no lockfile pin",
+  "User input flowing to eval/shell/HTML without escaping",
+]
+
+verification = [
+  "Threat model recorded for the changed surface",
+  "npm audit / pip-audit / cargo audit exit 0 (or risks documented)",
+  "OWASP Top 10 checklist reviewed for relevant items",
+]

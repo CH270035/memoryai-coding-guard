@@ -1,0 +1,52 @@
+---
+description: Security and Hardening
+alwaysApply: false
+---
+---
+name: security-and-hardening
+title: Security and Hardening
+phase: review
+source: https://github.com/addyosmani/agent-skills/blob/main/skills/security-and-hardening/SKILL.md
+source-license: MIT
+---
+
+# Security and Hardening
+
+## When to use
+
+- Handling user input, auth, or session state
+- Storing PII, payment data, or secrets
+- Adding a third-party dependency or external integration
+- Building anything reachable from the public internet
+
+## Process
+
+1. Threat-model first: list trust boundaries, assets, and abuse cases
+2. Three-tier boundaries: untrusted edge → validated core → trusted internals
+3. Validate input with allowlists at the edge, never with denylists
+4. Parameterize queries, encode output, set security headers
+5. Hash passwords with bcrypt/argon2; rotate and scope secrets
+6. Run dependency audit on every change
+
+## Rationalizations to ignore
+
+| Lie you tell yourself | Why it's wrong |
+|---|---|
+| It's an internal tool, threat-modelling is overkill. | Internal tools become external one merge later. Model now. |
+| We trust our database, no need to parameterize. | Trust the layer; parameterize anyway. Defense in depth costs nothing. |
+| This dependency is fine, npm audit is too noisy. | Audit, then suppress with reason. Silent suppression hides supply-chain attacks. |
+
+## Red flags
+
+- Raw SQL string concatenation with user input
+- Password stored or logged in plaintext
+- CORS set to wildcard with credentials
+- Secret committed to git history
+- Third-party dependency with no lockfile pin
+- User input flowing to eval/shell/HTML without escaping
+
+## Verification
+
+- Threat model recorded for the changed surface
+- npm audit / pip-audit / cargo audit exit 0 (or risks documented)
+- OWASP Top 10 checklist reviewed for relevant items

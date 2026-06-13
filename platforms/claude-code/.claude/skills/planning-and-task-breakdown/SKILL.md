@@ -1,0 +1,44 @@
+---
+name: planning-and-task-breakdown
+title: Planning and Task Breakdown
+phase: plan
+source: https://github.com/addyosmani/agent-skills/blob/main/skills/planning-and-task-breakdown/SKILL.md
+source-license: MIT
+---
+
+# Planning and Task Breakdown
+
+## When to use
+
+- A spec exists and needs to be broken into implementable tasks
+- More than 5 files are likely to be touched
+- Tasks have non-obvious dependencies on each other
+
+## Process
+
+1. Decompose the spec into tasks small enough that each fits one commit
+2. For every task: write acceptance criteria + a verification command
+3. Order tasks by dependency, not by area of code
+4. Mark each task XS / S / M / L — anything XL must be split
+5. Save the plan as tasks/plan.md and commit it before any code change
+
+## Rationalizations to ignore
+
+| Lie you tell yourself | Why it's wrong |
+|---|---|
+| I'll just start coding and break it down as I go. | Without a plan, scope drifts and reviewers cannot follow. |
+| All these tasks are similar — one big task is fine. | If reviewers can't see the seams, you can't roll back individually. |
+| Verification per task is overkill. | Without per-task verification, you don't know which task broke what. |
+
+## Red flags
+
+- All tasks sized XL (no decomposition)
+- Any task without a verification step
+- Plan lists order but not dependencies
+- Plan has no checkpoints between tasks
+
+## Verification
+
+- tasks/plan.md exists
+- Every task has acceptance criteria and a verify command
+- No task is sized XL

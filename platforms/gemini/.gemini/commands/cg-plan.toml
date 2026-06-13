@@ -1,0 +1,13 @@
+description = "Break the spec into small, verifiable tasks with acceptance criteria."
+prompt = """
+Invoke the coding-guard 'planning-and-task-breakdown' skill.
+
+Read SPEC.md (or ask the user to run /cg:spec first if missing).
+Decompose into tasks small enough to fit one commit. For every task:
+- acceptance criteria
+- verification command (test / lint / build)
+- size XS / S / M / L (split anything XL)
+- dependencies on other tasks
+
+Save as tasks/plan.md and ask the user to approve before coding.
+"""

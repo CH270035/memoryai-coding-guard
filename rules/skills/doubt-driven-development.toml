@@ -1,0 +1,42 @@
+# Skill: doubt-driven-development
+# Source: https://github.com/addyosmani/agent-skills/blob/main/skills/doubt-driven-development/SKILL.md
+# Source-License: MIT (see /NOTICE)
+
+id           = "doubt-driven-development"
+title        = "Doubt-Driven Development"
+phase        = "build"
+source       = "https://github.com/addyosmani/agent-skills/blob/main/skills/doubt-driven-development/SKILL.md"
+source_license = "MIT"
+strengthens  = ["think-before-coding", "anti-hallucinate"]
+
+when = [
+  "Stakes are high (production, security, irreversible action)",
+  "Working in unfamiliar code or with unfamiliar libraries",
+  "A confident output is cheaper to verify now than to debug later",
+  "Decision is hard to roll back",
+]
+
+process = [
+  "CLAIM: state the decision in one sentence",
+  "EXTRACT: list the load-bearing assumptions behind it",
+  "DOUBT: spawn a fresh-context adversarial review with the brief 'list only issues that would make this fail under the contract'",
+  "RECONCILE: address each issue or document why it's accepted",
+  "STOP: if the doubter finds a real defect, return to design",
+]
+
+rationalizations = [
+  { lie = "I'm confident, doubt is a waste of time.",                  truth = "Confidence and correctness are not the same. Doubt asks 'how would I know?' " },
+  { lie = "The doubter will find nitpicks, ignore them.",              truth = "Constrain the doubter to contract-breaking issues only. Then the signal is clean." },
+  { lie = "I'll think about it harder myself instead.",                truth = "Same context = same blind spots. Adversarial review needs fresh eyes." },
+]
+
+red_flags = [
+  "Confident decision in unfamiliar code with no second opinion",
+  "Adversarial review skipped because 'it looks fine'",
+  "Issues raised by the doubter were dismissed without rebuttal",
+]
+
+verification = [
+  "Decision recorded with CLAIM / EXTRACT / DOUBT outputs",
+  "Each doubter finding has a recorded resolution",
+]

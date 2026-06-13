@@ -1,0 +1,44 @@
+---
+name: code-review-and-quality
+title: Code Review and Quality
+phase: review
+source: https://github.com/addyosmani/agent-skills/blob/main/skills/code-review-and-quality/SKILL.md
+source-license: MIT
+---
+
+# Code Review and Quality
+
+## When to use
+
+- Before merging any change, regardless of size
+- Before tagging a release
+- When a change has been auto-generated and needs human-grade review
+
+## Process
+
+1. Five-axis review: correctness, readability, architecture, security, performance
+2. Target ~100 lines per review session — split larger PRs
+3. Tag every finding with severity: Critical / Important / Nit / FYI
+4. Critical and Important must resolve before merge; Nits are optional
+5. The reviewer's job is to improve code health, not to enforce taste
+
+## Rationalizations to ignore
+
+| Lie you tell yourself | Why it's wrong |
+|---|---|
+| It's a small change, skip the review. | Small changes ship the most production incidents. |
+| I'll fix the nits in a follow-up. | Follow-ups never come. Fix or close, don't defer. |
+| The author is senior, just approve. | Seniority is not a substitute for an actual read. |
+
+## Red flags
+
+- PR approved within 60 seconds of being opened
+- Review comments only on style, none on correctness
+- Author is the only reviewer (self-merge)
+- More than ~400 lines in a single review
+
+## Verification
+
+- Five-axis ratings recorded
+- Zero unresolved Critical or Important findings before merge
+- Tests pass on the merge commit

@@ -1,0 +1,43 @@
+---
+name: doubt-driven-development
+title: Doubt-Driven Development
+phase: build
+source: https://github.com/addyosmani/agent-skills/blob/main/skills/doubt-driven-development/SKILL.md
+source-license: MIT
+---
+
+# Doubt-Driven Development
+
+## When to use
+
+- Stakes are high (production, security, irreversible action)
+- Working in unfamiliar code or with unfamiliar libraries
+- A confident output is cheaper to verify now than to debug later
+- Decision is hard to roll back
+
+## Process
+
+1. CLAIM: state the decision in one sentence
+2. EXTRACT: list the load-bearing assumptions behind it
+3. DOUBT: spawn a fresh-context adversarial review with the brief 'list only issues that would make this fail under the contract'
+4. RECONCILE: address each issue or document why it's accepted
+5. STOP: if the doubter finds a real defect, return to design
+
+## Rationalizations to ignore
+
+| Lie you tell yourself | Why it's wrong |
+|---|---|
+| I'm confident, doubt is a waste of time. | Confidence and correctness are not the same. Doubt asks 'how would I know?'  |
+| The doubter will find nitpicks, ignore them. | Constrain the doubter to contract-breaking issues only. Then the signal is clean. |
+| I'll think about it harder myself instead. | Same context = same blind spots. Adversarial review needs fresh eyes. |
+
+## Red flags
+
+- Confident decision in unfamiliar code with no second opinion
+- Adversarial review skipped because 'it looks fine'
+- Issues raised by the doubter were dismissed without rebuttal
+
+## Verification
+
+- Decision recorded with CLAIM / EXTRACT / DOUBT outputs
+- Each doubter finding has a recorded resolution

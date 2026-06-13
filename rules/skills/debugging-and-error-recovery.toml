@@ -1,0 +1,43 @@
+# Skill: debugging-and-error-recovery
+# Source: https://github.com/addyosmani/agent-skills/blob/main/skills/debugging-and-error-recovery/SKILL.md
+# Source-License: MIT (see /NOTICE)
+
+id           = "debugging-and-error-recovery"
+title        = "Debugging and Error Recovery"
+phase        = "verify"
+source       = "https://github.com/addyosmani/agent-skills/blob/main/skills/debugging-and-error-recovery/SKILL.md"
+source_license = "MIT"
+strengthens  = ["anti-loop", "goal-driven"]
+
+when = [
+  "Tests fail, builds break, or behavior is unexpected",
+  "anti-loop has fired (two failures the same way)",
+  "A regression appeared without an obvious cause",
+]
+
+process = [
+  "REPRODUCE: pin the bug to a reliable failing case",
+  "LOCALIZE: bisect the change set with `git bisect run`",
+  "REDUCE: shrink the failing case to the minimum reproduction",
+  "FIX: change one thing, re-run the reproduction",
+  "GUARD: convert the reproduction into a regression test",
+]
+
+rationalizations = [
+  { lie = "I see the line, I'll just patch it.",                       truth = "70% of patches without reproduction miss the real cause." },
+  { lie = "Bisect takes too long.",                                    truth = "`git bisect run` automates it. Manual debugging takes longer." },
+  { lie = "The test passes locally, push it.",                         truth = "Race conditions and env drift hide here. Reproduce on CI before claiming fix." },
+]
+
+red_flags = [
+  "Multiple unrelated changes in the debugging diff",
+  "Fix without a regression test",
+  "Comment says 'temporary fix' or 'TODO: investigate'",
+  "Fix mutes the symptom (try/catch around the error) without addressing the cause",
+]
+
+verification = [
+  "A failing reproduction was recorded",
+  "The regression test fails on the unfixed branch",
+  "Build is green on a fresh checkout, not just locally",
+]

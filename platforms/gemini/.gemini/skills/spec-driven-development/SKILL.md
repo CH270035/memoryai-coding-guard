@@ -1,0 +1,45 @@
+---
+name: spec-driven-development
+title: Spec-Driven Development
+phase: define
+source: https://github.com/addyosmani/agent-skills/blob/main/skills/spec-driven-development/SKILL.md
+source-license: MIT
+---
+
+# Spec-Driven Development
+
+## When to use
+
+- Starting a new project, feature, or significant change
+- Requirements are ambiguous or only exist as a vague idea
+- The change touches multiple files or modules
+- Implementation would take more than 30 minutes
+
+## Process
+
+1. List the assumptions you are making and ask the user to correct them
+2. Write a SPEC.md covering: objective, commands, project structure, code style, testing strategy, boundaries
+3. Use the three-tier boundary system: always do / ask first / never do
+4. Get explicit approval on the spec before generating tasks
+5. Reference SPEC.md from every plan and PR description
+
+## Rationalizations to ignore
+
+| Lie you tell yourself | Why it's wrong |
+|---|---|
+| The task is small enough to skip the spec. | Small tasks with hidden assumptions become large reworks. |
+| I'll write the spec after I have a prototype. | Prototypes shape the spec instead of the other way around — that's the bug. |
+| The README already explains what we're doing. | READMEs describe shipped behavior. Specs constrain behavior we have not yet shipped. |
+
+## Red flags
+
+- Implementation started before SPEC.md exists
+- Spec lacks explicit success criteria for at least one feature
+- Spec lacks the three-tier boundary section
+- Multiple readers interpret the spec differently
+
+## Verification
+
+- SPEC.md exists at repo root or docs/SPEC.md
+- Every section (objective, commands, structure, style, testing, boundaries) is filled
+- User has acknowledged the spec

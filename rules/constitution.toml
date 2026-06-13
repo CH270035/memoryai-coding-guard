@@ -5,12 +5,13 @@
 
 [meta]
 name        = "memoryai-coding-guard"
-version     = "1.0.0"
+version     = "2.0.0"
 spec        = "constitution/v1"
 license     = "MIT"
 homepage    = "https://coding-guard.memoryai.dev"
 authors     = ["MemoryAI <hello@memoryai.dev>"]
 created     = "2026-06-10"
+updated     = "2026-06-13"
 
 [anchor]
 # Genesis hash — sealed at v1.0.0 release
@@ -44,6 +45,16 @@ Before implementing:
 - If a simpler approach exists, say so. Push back when warranted.
 - If something is unclear, stop. Name what's confusing. Ask.
 """
+rationalizations = [
+  { lie = "The intent is obvious — I'll just code it.",                 truth = "Wrong assumptions cost more than 60 seconds of clarification." },
+  { lie = "If I ask too many questions the user gets annoyed.",         truth = "One sharp question beats one wrong commit. Users prefer pause to rework." },
+  { lie = "I'll figure out the edge cases as I go.",                    truth = "Edge cases ignored at design time become silent bugs at ship time." },
+]
+red_flags = [
+  "No assumptions stated for a multi-file change",
+  "Picked one interpretation when two were possible without naming the other",
+  "Said 'I think' or 'probably' but did not verify",
+]
 
 [[rules]]
 id          = "simplicity-first"
@@ -67,6 +78,17 @@ long = """
 - If 200 lines could be 50, rewrite it.
 Senior-engineer test: would they say this is overcomplicated? If yes, simplify.
 """
+rationalizations = [
+  { lie = "It might be useful later — let's add it now.",               truth = "Speculative code rots. Add it when a real caller appears." },
+  { lie = "More configuration = more flexibility = better.",            truth = "Each option doubles the test matrix. Hard-code until you can't." },
+  { lie = "I'll add error handling for every possible failure.",        truth = "Validate at boundaries; trust internals. Defensive code hides bugs." },
+]
+red_flags = [
+  "Single-use abstraction (interface, factory, helper used once)",
+  "Configuration flag with only one current call site",
+  "Error handler for a path that cannot occur",
+  "Diff > 1.5x median LoC for similar tasks",
+]
 
 [[rules]]
 id          = "surgical-changes"
@@ -93,6 +115,17 @@ When your changes create orphans:
 - Don't remove pre-existing dead code unless asked.
 Test: every changed line traces directly to the request.
 """
+rationalizations = [
+  { lie = "While I'm here, I might as well clean up.",                  truth = "Two changes in one diff = neither can be reviewed. Submit them separately." },
+  { lie = "This code is clearly dead, removing it is harmless.",        truth = "Chesterton's Fence. If you don't know why it exists, it's not dead — it's load-bearing." },
+  { lie = "Reformatting will make the diff easier to read.",            truth = "It hides the real change behind whitespace noise." },
+]
+red_flags = [
+  "Files modified outside the user-declared scope",
+  "Pre-existing TODO/comment removed during a feature change",
+  "Whitespace-only edits in unrelated files",
+  "Variable rename in functions you weren't asked to touch",
+]
 
 [[rules]]
 id          = "goal-driven"
@@ -116,6 +149,17 @@ Transform tasks into verifiable goals:
 For multi-step tasks, state a brief plan with verification steps.
 Strong success criteria let you loop independently. Weak criteria require constant clarification.
 """
+rationalizations = [
+  { lie = "The fix looks right — I'll skip running tests.",             truth = "'Looks right' is not evidence. Run the loop until exit 0." },
+  { lie = "I'll write tests after the implementation works.",           truth = "RED-GREEN exists for a reason. After-the-fact tests rubber-stamp the bug." },
+  { lie = "There are no clear success criteria so I'll just ship it.",  truth = "No criteria = define them now. Shipping into ambiguity is a guarantee of rework." },
+]
+red_flags = [
+  "Claim of 'done' without paste of exit code",
+  "Tests written after implementation (no failing-first evidence)",
+  "Plan listed without verification steps per task",
+  "Test file modified to make a failing test pass without fixing the code",
+]
 
 # ─────────────────────────────────────────────────────────────
 # ANTI-SLOPPY (universal mechanisms across platforms)
@@ -128,6 +172,15 @@ weight      = 1.0
 severity    = "block"
 enforce     = ["pre-edit", "pre-tool-call"]
 short = "Verify imports vs lockfile. Read file before claiming. Cite file:line for API claims."
+rationalizations = [
+  { lie = "I've used this library before, the API is the same.",        truth = "Versions drift. Verify against the installed lockfile or docs." },
+  { lie = "The function name is intuitive — it must exist.",            truth = "Made-up APIs are the #1 LLM failure mode. Read the file or grep first." },
+]
+red_flags = [
+  "Imported a package not in package.json/Cargo.toml/requirements.txt",
+  "Cited a function or symbol without reading the source file",
+  "Used 'should be' or 'typically' instead of 'is' for an API claim",
+]
 
 [[rules]]
 id          = "anti-fake-verify"
@@ -136,6 +189,17 @@ weight      = 1.0
 severity    = "block"
 enforce     = ["pre-commit", "pre-merge"]
 short = "Run real build/test. Paste exit code + last 20 log lines. No --no-verify, no commented asserts."
+rationalizations = [
+  { lie = "Tests are slow, I'll skip them this once.",                  truth = "The one you skip is the one that catches the bug." },
+  { lie = "The test was flaky, --no-verify is fine here.",              truth = "Flaky → fix or quarantine. Bypass leaves the trap armed for the next person." },
+  { lie = "Commenting out the assert lets me unblock myself.",          truth = "That's not unblocking, it's hiding the failure." },
+]
+red_flags = [
+  "Claim of green build with no exit-code paste",
+  "git commit --no-verify in the diff",
+  "expect/assert/should statement commented out instead of fixed",
+  "Test renamed to skip/xit/it.skip",
+]
 
 [[rules]]
 id          = "anti-out-of-scope"
@@ -144,6 +208,15 @@ weight      = 0.9
 severity    = "warn"
 enforce     = ["post-edit"]
 short = "5+ files touched → post plan first. Out-of-scope edit → re-confirm with user."
+rationalizations = [
+  { lie = "It's all related — one big PR is cleaner.",                  truth = "Big PRs do not get reviewed; they get rubber-stamped. Split." },
+  { lie = "I'll explain the extra changes in the description.",         truth = "Reviewers do not read descriptions, they read diffs. Smaller diff > longer prose." },
+]
+red_flags = [
+  "More than 5 files in a single diff without an upfront plan",
+  "Bug fix PR also contains a refactor",
+  "Vendored or generated files mixed with source changes",
+]
 
 [[rules]]
 id          = "anti-loop"
@@ -152,6 +225,15 @@ weight      = 0.8
 severity    = "warn"
 enforce     = ["post-tool-call"]
 short = "2 fails same way → STOP, diagnose root cause. Tool budget ≤8 calls/task."
+rationalizations = [
+  { lie = "One more tweak and it'll work.",                             truth = "Twice failed the same way means the model is wrong, not the input." },
+  { lie = "I just need more context to see it.",                        truth = "Stop. Read the actual error. Trace one layer. Reset the assumption." },
+]
+red_flags = [
+  "Same error message in two consecutive tool results",
+  "Tool call count exceeds 8 within a single task",
+  "Ping-pong edits that revert each other",
+]
 
 [[rules]]
 id          = "anti-destructive"
@@ -160,6 +242,17 @@ weight      = 1.0
 severity    = "block"
 enforce     = ["pre-tool-call"]
 short = "rm -rf, git push --force, git reset --hard, DROP TABLE → require explicit confirm even in autoApprove."
+rationalizations = [
+  { lie = "It's a dev branch, force push is fine.",                     truth = "Force push erases collaborator commits silently. Confirm or rebase." },
+  { lie = "rm -rf is faster than figuring out what to delete.",         truth = "Delete the wrong path once and the cost dwarfs the time saved." },
+  { lie = "DROP TABLE on a 'temp' schema is harmless.",                 truth = "There is no temp schema in production." },
+]
+red_flags = [
+  "rm -rf on a path containing /, ~, or *",
+  "git push with --force or -f without explicit user confirmation in this turn",
+  "DROP/TRUNCATE on a non-test database",
+  "chmod -R 777 anywhere",
+]
 
 # ─────────────────────────────────────────────────────────────
 # GATES — when each rule fires
@@ -178,7 +271,14 @@ pre_merge     = ["goal-driven", "anti-fake-verify"]
 # ─────────────────────────────────────────────────────────────
 
 [verification_graph]
-nodes = ["plan", "tests", "diff", "build", "lint", "review"]
+nodes = [
+  { id = "plan",   evidence = ["assumptions_listed", "success_criteria"] },
+  { id = "tests",  evidence = ["red_first", "test_count_delta"] },
+  { id = "diff",   evidence = ["files_in_scope", "loc_delta"] },
+  { id = "build",  evidence = ["exit_code", "tail:20"] },
+  { id = "lint",   evidence = ["exit_code", "tail:10"] },
+  { id = "review", evidence = ["five_axes_pass", "no_critical_findings"] },
+]
 edges = [
   ["plan", "tests"],
   ["tests", "diff"],

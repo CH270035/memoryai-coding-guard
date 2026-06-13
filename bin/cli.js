@@ -94,6 +94,14 @@ program
   });
 
 program
+  .command("validate")
+  .description("Validate skills, personas, and commands TOML files")
+  .action(async () => {
+    const { validateAll } = await import("../lib/validator.js");
+    await validateAll();
+  });
+
+program
   .command("sign")
   .description("Sign constitution.toml (maintainers only)")
   .action(async () => {

@@ -1,0 +1,8 @@
+# coding-guard preset for OpenAI Codex CLI
+# Apply via: codex --config ~/.codex/config.toml
+
+[approval]
+destructive_ops = "require-confirm"
+
+[rules]
+version = "2.0.0"

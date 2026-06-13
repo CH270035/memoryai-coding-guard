@@ -1,0 +1,7 @@
+{
+  "name": "memoryai-coding-guard",
+  "description": "Coding-Guard v2.0.0 — 4 principles + anti-sloppy + 7 skills + 4 personas.",
+  "commands": "./.claude/commands",
+  "skills": "./.claude/skills",
+  "agents": "./.claude/agents"
+}

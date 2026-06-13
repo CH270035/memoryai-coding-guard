@@ -1,0 +1,43 @@
+# Skill: planning-and-task-breakdown
+# Source: https://github.com/addyosmani/agent-skills/blob/main/skills/planning-and-task-breakdown/SKILL.md
+# Source-License: MIT (see /NOTICE)
+
+id           = "planning-and-task-breakdown"
+title        = "Planning and Task Breakdown"
+phase        = "plan"
+source       = "https://github.com/addyosmani/agent-skills/blob/main/skills/planning-and-task-breakdown/SKILL.md"
+source_license = "MIT"
+strengthens  = ["anti-out-of-scope", "goal-driven"]
+
+when = [
+  "A spec exists and needs to be broken into implementable tasks",
+  "More than 5 files are likely to be touched",
+  "Tasks have non-obvious dependencies on each other",
+]
+
+process = [
+  "Decompose the spec into tasks small enough that each fits one commit",
+  "For every task: write acceptance criteria + a verification command",
+  "Order tasks by dependency, not by area of code",
+  "Mark each task XS / S / M / L — anything XL must be split",
+  "Save the plan as tasks/plan.md and commit it before any code change",
+]
+
+rationalizations = [
+  { lie = "I'll just start coding and break it down as I go.",         truth = "Without a plan, scope drifts and reviewers cannot follow." },
+  { lie = "All these tasks are similar — one big task is fine.",       truth = "If reviewers can't see the seams, you can't roll back individually." },
+  { lie = "Verification per task is overkill.",                        truth = "Without per-task verification, you don't know which task broke what." },
+]
+
+red_flags = [
+  "All tasks sized XL (no decomposition)",
+  "Any task without a verification step",
+  "Plan lists order but not dependencies",
+  "Plan has no checkpoints between tasks",
+]
+
+verification = [
+  "tasks/plan.md exists",
+  "Every task has acceptance criteria and a verify command",
+  "No task is sized XL",
+]

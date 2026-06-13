@@ -1,0 +1,6 @@
+{
+  "coding-guard": {
+    "version": 2,
+    "enforcement": "advisory"
+  }
+}

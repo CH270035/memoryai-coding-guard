@@ -1,0 +1,45 @@
+# Skill: spec-driven-development
+# Source: https://github.com/addyosmani/agent-skills/blob/main/skills/spec-driven-development/SKILL.md
+# Source-License: MIT (see /NOTICE)
+# Adapted: restructured into TOML, integrated with coding-guard's gate model.
+
+id           = "spec-driven-development"
+title        = "Spec-Driven Development"
+phase        = "define"
+source       = "https://github.com/addyosmani/agent-skills/blob/main/skills/spec-driven-development/SKILL.md"
+source_license = "MIT"
+strengthens  = ["think-before-coding", "goal-driven"]
+
+when = [
+  "Starting a new project, feature, or significant change",
+  "Requirements are ambiguous or only exist as a vague idea",
+  "The change touches multiple files or modules",
+  "Implementation would take more than 30 minutes",
+]
+
+process = [
+  "List the assumptions you are making and ask the user to correct them",
+  "Write a SPEC.md covering: objective, commands, project structure, code style, testing strategy, boundaries",
+  "Use the three-tier boundary system: always do / ask first / never do",
+  "Get explicit approval on the spec before generating tasks",
+  "Reference SPEC.md from every plan and PR description",
+]
+
+rationalizations = [
+  { lie = "The task is small enough to skip the spec.",                truth = "Small tasks with hidden assumptions become large reworks." },
+  { lie = "I'll write the spec after I have a prototype.",             truth = "Prototypes shape the spec instead of the other way around — that's the bug." },
+  { lie = "The README already explains what we're doing.",             truth = "READMEs describe shipped behavior. Specs constrain behavior we have not yet shipped." },
+]
+
+red_flags = [
+  "Implementation started before SPEC.md exists",
+  "Spec lacks explicit success criteria for at least one feature",
+  "Spec lacks the three-tier boundary section",
+  "Multiple readers interpret the spec differently",
+]
+
+verification = [
+  "SPEC.md exists at repo root or docs/SPEC.md",
+  "Every section (objective, commands, structure, style, testing, boundaries) is filled",
+  "User has acknowledged the spec",
+]

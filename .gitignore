@@ -43,3 +43,8 @@ coverage/
 # Temp
 tmp/
 *.tmp
+
+# Upstream agent-skills checkout (sync only — never committed)
+.upstream/
+agent-skills-main/
+agent-skills-main.zip

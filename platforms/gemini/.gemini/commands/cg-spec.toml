@@ -1,0 +1,14 @@
+description = "Start spec-driven development — produce SPEC.md before any code."
+prompt = """
+Invoke the coding-guard 'spec-driven-development' skill.
+
+Before any code, ask the user clarifying questions about:
+1. Objective and target users
+2. Core features and acceptance criteria
+3. Tech stack preferences and constraints
+4. Three-tier boundaries — always do / ask first / never do
+
+State your assumptions explicitly. Then write SPEC.md at repo root,
+covering: objective, commands, project structure, code style, testing
+strategy, boundaries. Confirm with the user before proceeding.
+"""

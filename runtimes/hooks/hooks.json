@@ -1,7 +1,7 @@
 {
   "$schema": "https://schemas.anthropic.com/claude-code/hooks.json",
   "name": "memoryai-coding-guard",
-  "description": "Anti-sloppy enforcement hooks. Block dangerous ops, force verify before done.",
+  "description": "Anti-sloppy enforcement hooks. Block dangerous ops, force verify before done, quote rationalizations, detect red flags.",
   "hooks": {
     "PreToolUse": [
       {
@@ -15,18 +15,27 @@
         "matcher": "Edit|Write|MultiEdit",
         "command": "node ${CLAUDE_PROJECT_DIR}/.coding-guard/hooks/post-edit-verify.js",
         "description": "After edits: detect project type, run lint/typecheck on changed files. Re-inject errors."
+      },
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "command": "node ${CLAUDE_PROJECT_DIR}/.coding-guard/hooks/detect-red-flags.js",
+        "description": "Scan changed content for observable anti-patterns from constitution red_flags."
       }
     ],
     "Stop": [
       {
         "command": "node ${CLAUDE_PROJECT_DIR}/.coding-guard/hooks/stop-gate.js",
-        "description": "Block 'task done' if code touched but verify (build/test) never ran green this session."
+        "description": "Block 'task done' if code touched but verify never ran green with evidence (exit_code + tail:20)."
       }
     ],
     "UserPromptSubmit": [
       {
         "command": "node ${CLAUDE_PROJECT_DIR}/.coding-guard/hooks/inject-rules.js",
         "description": "When user says 'done|ship|deploy|merge', inject 4-rule reminder."
+      },
+      {
+        "command": "node ${CLAUDE_PROJECT_DIR}/.coding-guard/hooks/quote-rationalization.js",
+        "description": "When user message matches a known rationalization, quote the truth back."
       }
     ]
   }

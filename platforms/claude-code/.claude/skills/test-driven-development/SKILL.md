@@ -1,0 +1,45 @@
+---
+name: test-driven-development
+title: Test-Driven Development
+phase: verify
+source: https://github.com/addyosmani/agent-skills/blob/main/skills/test-driven-development/SKILL.md
+source-license: MIT
+---
+
+# Test-Driven Development
+
+## When to use
+
+- Implementing logic, not configuration
+- Fixing a bug — write the failing regression test first
+- Changing observable behavior of an existing function
+
+## Process
+
+1. RED: write the smallest test that fails for the right reason
+2. GREEN: write the minimum code to pass that test
+3. REFACTOR: simplify without breaking the test
+4. Test pyramid: ~80% unit, 15% integration, 5% e2e
+5. Prefer DAMP (descriptive) over DRY in test code — clarity wins
+6. Beyonce Rule: if you liked it then you should have put a test on it
+
+## Rationalizations to ignore
+
+| Lie you tell yourself | Why it's wrong |
+|---|---|
+| I'll add tests once the feature works. | After-the-fact tests confirm the bug, not the requirement. |
+| This change is too small to test. | Small changes break the most often because they look safe. |
+| Mocking everything is faster. | Mocked tests pass while production crashes. Anchor mocks at boundaries only. |
+
+## Red flags
+
+- Test added in the same commit as the implementation, never seen red
+- Test passes when the implementation is reverted
+- Mock the database in an integration test
+- Single test asserts more than 5 unrelated things
+
+## Verification
+
+- Failing test was committed (or visible in run log) before the fix
+- Test fails on the unfixed branch and passes on the fix branch
+- npm test / pytest / cargo test exit 0

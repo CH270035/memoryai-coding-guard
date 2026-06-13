@@ -1,0 +1,15 @@
+description = "Adversarial fresh-context review of a non-trivial decision."
+prompt = """
+Invoke the coding-guard 'doubt-driven-development' skill.
+
+Stakes-high decision incoming. Run:
+1. CLAIM   — state the decision in one sentence
+2. EXTRACT — list load-bearing assumptions
+3. DOUBT   — spawn a fresh-context adversarial reviewer with the brief
+            'list only issues that would make this fail under the contract'
+4. RECONCILE — address each issue or document why accepted
+5. STOP    — if a real defect surfaces, return to design
+
+Use this for: production changes, security work, irreversible operations,
+unfamiliar code, anything you can't undo with `git revert`.
+"""

@@ -1,0 +1,44 @@
+# Skill: test-driven-development
+# Source: https://github.com/addyosmani/agent-skills/blob/main/skills/test-driven-development/SKILL.md
+# Source-License: MIT (see /NOTICE)
+
+id           = "test-driven-development"
+title        = "Test-Driven Development"
+phase        = "verify"
+source       = "https://github.com/addyosmani/agent-skills/blob/main/skills/test-driven-development/SKILL.md"
+source_license = "MIT"
+strengthens  = ["goal-driven", "anti-fake-verify"]
+
+when = [
+  "Implementing logic, not configuration",
+  "Fixing a bug — write the failing regression test first",
+  "Changing observable behavior of an existing function",
+]
+
+process = [
+  "RED: write the smallest test that fails for the right reason",
+  "GREEN: write the minimum code to pass that test",
+  "REFACTOR: simplify without breaking the test",
+  "Test pyramid: ~80% unit, 15% integration, 5% e2e",
+  "Prefer DAMP (descriptive) over DRY in test code — clarity wins",
+  "Beyonce Rule: if you liked it then you should have put a test on it",
+]
+
+rationalizations = [
+  { lie = "I'll add tests once the feature works.",                    truth = "After-the-fact tests confirm the bug, not the requirement." },
+  { lie = "This change is too small to test.",                         truth = "Small changes break the most often because they look safe." },
+  { lie = "Mocking everything is faster.",                             truth = "Mocked tests pass while production crashes. Anchor mocks at boundaries only." },
+]
+
+red_flags = [
+  "Test added in the same commit as the implementation, never seen red",
+  "Test passes when the implementation is reverted",
+  "Mock the database in an integration test",
+  "Single test asserts more than 5 unrelated things",
+]
+
+verification = [
+  "Failing test was committed (or visible in run log) before the fix",
+  "Test fails on the unfixed branch and passes on the fix branch",
+  "npm test / pytest / cargo test exit 0",
+]

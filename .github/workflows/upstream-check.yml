@@ -1,0 +1,20 @@
+name: upstream-check
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"   # weekly, Monday 06:17 UTC
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - name: Sync report
+        run: node scripts/sync-upstream.js --pull
+      - name: Diff summary
+        run: |
+          echo "## Upstream sync report" >> $GITHUB_STEP_SUMMARY
+          node scripts/sync-upstream.js >> $GITHUB_STEP_SUMMARY 2>&1 || true
