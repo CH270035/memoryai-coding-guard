@@ -1,6 +1,6 @@
 {
   "name": "@memoryai.dev/coding-guard",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Universal coding-agent guardrails: 4 core principles + anti-sloppy enforcement, installs into 11 IDE/CLI in one command. Family of @memoryai.dev/*-guard.",
   "keywords": [
     "ai",
@@ -17,7 +17,7 @@
     "anti-sloppy",
     "memoryai"
   ],
-  "homepage": "https://coding-guard.memoryai.dev",
+  "homepage": "https://memoryai.dev",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CH270035/memoryai-coding-guard.git"
